@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Contenuto implements Comparable<Contenuto> {
@@ -29,6 +30,9 @@ public class Contenuto implements Comparable<Contenuto> {
 	@Column(nullable = false)	
 		private int durata;
 
+	@ManyToOne(optional = false)
+	private Regista regista;
+	
 	
 	public Contenuto() {
 		super();
@@ -70,8 +74,13 @@ public class Contenuto implements Comparable<Contenuto> {
 
 	@Override
 	public String toString() {
-		return "Contenuto [id= " + id + ", titolo= " + titolo + ", tipologia= " + tipologia + ", genere= " + genere
-				+ ", anno= " + anno + ", durata= " + durata + "]";
+		return "Contenuto [id= " + id 
+				+ ", titolo= " + titolo 
+				+ ", tipologia= " + tipologia 
+				+ ", genere= " + genere
+				+ ", anno= " + anno 
+				+ ", durata= " + durata 
+				+ ",Regista= " + regista.getNome() + " " + regista.getCognome() + "]";
 	}
 	
 	@Override
@@ -79,12 +88,12 @@ public class Contenuto implements Comparable<Contenuto> {
 		if (this.titolo.compareTo(contenuto.getTitolo()) != 0)	//se i titoli non sono uguali
 			return this.titolo.compareTo(contenuto.getTitolo());
 		else {								//se i nomi sono uguali ordino per anno
-		if (this.anno>contenuto.anno)
-			return 1;
-		else if	(this.anno<contenuto.anno)
-			return -1;
-		else
-			return 0;
+			if (this.anno>contenuto.anno)
+				return 1;
+			else if	(this.anno<contenuto.anno)
+				return -1;
+			else
+				return 0;
 		}
 	}
 	

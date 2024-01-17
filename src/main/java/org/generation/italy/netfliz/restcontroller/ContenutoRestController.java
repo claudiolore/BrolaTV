@@ -1,28 +1,27 @@
-package org.generation.italy.netfliz.controller;
-
+package org.generation.italy.netfliz.restcontroller;
 
 import java.util.ArrayList;
-
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import org.generation.italy.netfliz.model.Contenuto;
 import org.generation.italy.netfliz.repository.ContenutiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@RequestMapping("/Contenuti")
-public class ContenutiController {
-
+@RestController
+@RequestMapping("/api/Contenuti")
+public class ContenutoRestController {
 	@Autowired
 	ContenutiRepository contenutiRepository;
 	
+
 	@GetMapping			//----- /Contenuti
 	@ResponseBody
 	public String benvenuto() {
@@ -105,6 +104,4 @@ public class ContenutiController {
 			return "Contenuto non dispobile";
 		
 	}
-	
-	
 }
