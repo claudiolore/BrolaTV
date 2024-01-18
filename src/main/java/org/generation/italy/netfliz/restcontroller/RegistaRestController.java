@@ -10,28 +10,27 @@ import org.generation.italy.netfliz.repository.RegistaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/Contenuti")
-public class RegistaRestRepository {
+@RequestMapping("/api/Registi")
+public class RegistaRestController {
 	@Autowired
 	RegistaRepository registaRepository;
 	
 
 	@GetMapping			//----- /Registi
-	@ResponseBody
 	public String benvenuto() {
 		return "Benvenuto su registi!";
 	}
 //-----------------------------------------------------------------------------------------------------
 	
 	@GetMapping("/elenco")
-	@ResponseBody
-	public String elencoRegisti(
+	public List<Regista> elencoRegisti(
 		@RequestParam(required = false) String ordinamento,
 		
 		@RequestParam(required = false) String nome,
@@ -67,34 +66,36 @@ public class RegistaRestRepository {
 			elencoRegisti = (ArrayList<Regista>) 
 							registaRepository.findByNomeAndCognomeAndNazionalita(nome, cognome, nazionalita);
 		else	
-			return "Inserimento non valido";
+			return null;
 		
 		
 		if(ordinamento!=null) {
-			if(ordinamento.equalsIgnoreCase("asc"))
+			if(ordinamento.equalsIgnoreCase("asc")) 
 				Collections.sort(elencoRegisti);
 			else if(ordinamento.equalsIgnoreCase("desc"))
-				Collections.sort(elencoRegisti, Collections.reverseOrder());
-			else
-				return "Ordinamento non valido";
-		}
-		StringBuilder elencoRegistiBuilder = new StringBuilder();
-		elencoRegistiBuilder.append("Registi trovati: " + elencoRegisti.size());
-		elencoRegistiBuilder.append("<br><br>");
-		for(Regista r:elencoRegisti)
-			elencoRegistiBuilder.append(r.toString() + "<br>");
+				Collections.sort(elencoRegisti, Collections.reverseOrder());	
+		}	
+		return elencoRegisti;
 		
-		return elencoRegistiBuilder.toString();
 	}
 //--------------------------------------------------------------------------------------------------------------	
-	
+	@GetMapping("/senzaContenuto")
+	public List<Regista> registiSenzaContenuto(){
+		List<Regista> elencoRegisti = registaRepository.findRegistiSenzaContenuti();
+		return elencoRegisti;
+	}
+//---------------------------------------------------------------------------------------------------------------	
+	@PostMapping("/addRegista")
+	public void addRegista(	@RequestParam Object nuovoRegista) {
+		
+	}
+//----------------------------------------------------------------------------------------------------------------	
 	@GetMapping("{id}")
-	@ResponseBody
-	public String dettaglioRegista(@PathVariable Integer id) {
+	public Regista dettaglioRegista(@PathVariable Integer id) {
 		Optional<Regista> optRegista = registaRepository.findById(id);
 		if(optRegista.isPresent())
-			return optRegista.get().toString();
+			return optRegista.get();
 		else
-			return "Regista non disponibile!";
+			return null;
 	}
 }

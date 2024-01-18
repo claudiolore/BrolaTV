@@ -64,11 +64,6 @@ public class Regista implements Comparable<Regista>{
 
 	@Override
 	public int compareTo(Regista regista) {		
-//		if (this.nome.compareTo(regista.getNome()) != 0)	//se i titoli non sono uguali
-//			return this.nome.compareTo(regista.getNome());
-//		else {								//se i nomi sono uguali ordino per anno
-//			return this.cognome.compareTo(regista.getCognome());
-//		}
 		return (this.nome+this.cognome).compareTo(regista.getNome()+regista.getCognome());
 	}
 	

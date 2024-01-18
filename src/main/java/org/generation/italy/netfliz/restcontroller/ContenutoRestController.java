@@ -31,7 +31,7 @@ public class ContenutoRestController {
 	
 	@GetMapping	("/elenco")		//----- /Contenuti/elencoProdotti
 	@ResponseBody
-	public String elencoContenuti(
+	public List<Contenuto> elencoContenuti(
 		@RequestParam(required = false) String titolo, 
 		@RequestParam(required = false) String tipologia,
 		@RequestParam(required = false) Integer anno,
@@ -83,25 +83,21 @@ public class ContenutoRestController {
 				Collections.sort(elencoContenuti);		//ordinamento predefinito (tramite nome) in maniera crescente
 			else if (ordinamento.equals("desc"))
 				Collections.sort(elencoContenuti,Collections.reverseOrder());	//ordinamento predefinito (tramite nome) in maniera decrescente
-			else
-				return "Ordinamento non valido";
+		
 		}
-		StringBuilder elenco = new StringBuilder();
-		elenco.append("Contenuti trovati: " + elencoContenuti.size());
-		elenco.append("<br><br>");
-		for (Contenuto c:elencoContenuti)
-			elenco.append(c.toString()+ "<br>");		
-		return elenco.toString();
+			
+		return elencoContenuti;
 	}	
 //---------------------------------------------------------------------------------------------------------------	
 	@GetMapping("{id}")
 	@ResponseBody
-	public String dettaglioContenuto(@PathVariable Integer id) {
+	public Contenuto dettaglioContenuto(@PathVariable Integer id) {
 		Optional<Contenuto> optContenuto = contenutiRepository.findById(id); 
 		if(optContenuto.isPresent())
-			return optContenuto.get().toString();
+			return optContenuto.get();
 		else
-			return "Contenuto non dispobile";
+			return null;
+		
 		
 	}
 }

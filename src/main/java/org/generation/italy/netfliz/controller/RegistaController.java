@@ -2,6 +2,7 @@ package org.generation.italy.netfliz.controller;
 
 import java.util.ArrayList;
 
+
 import java.util.Collections;
 import java.util.Optional;
 
@@ -34,7 +35,6 @@ public class RegistaController {
 	@ResponseBody
 	public String elencoRegisti(
 		@RequestParam(required = false) String ordinamento,
-		
 		@RequestParam(required = false) String nome,
 		@RequestParam(required = false) String cognome,
 		@RequestParam(required = false) String nazionalita) throws Exception{
@@ -88,6 +88,8 @@ public class RegistaController {
 		return elencoRegistiBuilder.toString();
 	}
 //--------------------------------------------------------------------------------------------------------------	
+	
+	
 	
 	@GetMapping("{id}")
 	@ResponseBody
