@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
 
+import org.generation.italy.netfliz.model.Attore;
 import org.generation.italy.netfliz.model.Contenuto;
 import org.generation.italy.netfliz.repository.ContenutiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,15 +26,16 @@ public class ContenutiController {
 	ContenutiRepository contenutiRepository;
 	
 	@GetMapping			//----- /Contenuti
-	@ResponseBody
+	
 	public String benvenuto() {
-		return "Benvenuto su Netfliz!";
+		return "/contenuti/home";
 	}
 	
 	
 	@GetMapping	("/elenco")		//----- /Contenuti/elencoProdotti
-	@ResponseBody
+	
 	public String elencoContenuti(
+		Model model,
 		@RequestParam(required = false) String titolo, 
 		@RequestParam(required = false) String tipologia,
 		@RequestParam(required = false) Integer anno,
@@ -87,23 +90,25 @@ public class ContenutiController {
 			else
 				return "Ordinamento non valido";
 		}
-		StringBuilder elenco = new StringBuilder();
-		elenco.append("Contenuti trovati: " + elencoContenuti.size());
-		elenco.append("<br><br>");
-		for (Contenuto c:elencoContenuti)
-			elenco.append(c.toString()+ "<br>");		
-		return elenco.toString();
+		model.addAttribute("elenco", elencoContenuti);
+		return "/contenuti/elenco";
 	}	
+
+	
+	
+	
+	
 //---------------------------------------------------------------------------------------------------------------	
-	@GetMapping("{id}")
-	@ResponseBody
-	public String dettaglioContenuto(@PathVariable Integer id) {
-		Optional<Contenuto> optContenuto = contenutiRepository.findById(id); 
-		if(optContenuto.isPresent())
-			return optContenuto.get().toString();
+	@GetMapping("/dettaglio/{id}")
+	public String dettaglioContenuto(@PathVariable Integer id,
+										Model model) {
+		Optional<Contenuto> optContenuto=contenutiRepository.findById(id);
+		if (optContenuto.isPresent()) {	//il prodotto è stato trovato
+			model.addAttribute("contenuto", optContenuto.get());
+			return "/contenuti/dettaglio";
+		}
 		else
-			return "Contenuto non dispobile";
-		
+			return "/contenuti/nonTrovato";
 	}
 	
 	

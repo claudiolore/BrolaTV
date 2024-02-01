@@ -9,35 +9,36 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 
 @Entity
-public class Regista implements Comparable<Regista>{
-	@Id		//è una chiave primaria
-	@GeneratedValue(strategy = GenerationType.IDENTITY)	
-		private	int id;
-	@Column(nullable = false, length = 50)
+public class Attore implements Comparable<Attore> {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	@Column(nullable=false)
 	private String nome;
-	@Column(nullable = false, length = 50)
+	@Column(nullable=false)
 	private String cognome;
-	@Column(nullable = false, length = 50)
+	@Column(nullable=false)
 	private String nazionalita;
+	@Column(nullable=false)
+	private Integer annoDiNascita;
 	
 	@JsonBackReference
-	@OneToMany(mappedBy = "regista")		
-	List<Contenuto> elencoContenuti;	
+	@ManyToMany
+	private List<Contenuto> elencoContenuti;	
 //----------------------------------------------------------------------------------------------------------------	
-	
-	public Regista() {
+	public Attore() {
 		super();
 	}
-
-	public Regista(int id, String nome, String cognome, String nazionalita) {
+	
+	public Attore(String nome, String cognome, String nazionalita, Integer annoDiNascita) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.nazionalita = nazionalita;
+		this.annoDiNascita = annoDiNascita;
 	}
 //----------------------------------------------------------------------------------------------------------------	
 
@@ -56,11 +57,18 @@ public class Regista implements Comparable<Regista>{
 	public String getNazionalita() {
 		return nazionalita;
 	}
+
+	public Integer getAnnoDiNascita() {
+		return annoDiNascita;
+	}
+
 	public List<Contenuto> getElencoContenuti() {
 		return elencoContenuti;
 	}
 	
-		
+	
+//----------------------------------------------------------------------------------------------------------------	
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -73,26 +81,36 @@ public class Regista implements Comparable<Regista>{
 		this.nazionalita = nazionalita;
 	}
 
+	public void setAnnoDiNascita(Integer annoDiNascita) {
+		this.annoDiNascita = annoDiNascita;
+	}
+
 	public void setElencoContenuti(List<Contenuto> elencoContenuti) {
 		this.elencoContenuti = elencoContenuti;
 	}
+//----------------------------------------------------------------------------------------------------------------	
 
-	//----------------------------------------------------------------------------------------------------------------	
 	@Override
 	public String toString() {
-		return "Regista [ id = " + id 
-				+ ", nome = " + nome 
+		return "Attore [nome = " + nome 
 				+ ", cognome = " + cognome 
-				+ ", nazionalita = " + nazionalita+"]";
+				+ ", nazionalita = " + nazionalita 
+				+ ", annoDiNascita = "+ annoDiNascita + "]";
 	}
 
 	@Override
-	public int compareTo(Regista regista) {		
-		return (this.nome+this.cognome).compareTo(regista.getNome()+regista.getCognome());
+	public int compareTo(Attore attore) {		
+		return (this.nome+this.cognome).compareTo(attore.getNome()+attore.getCognome());
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }
-	
-	
-

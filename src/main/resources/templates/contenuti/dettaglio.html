@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+	<head>
+		<meta charset="UTF-8">
+		<title>Dettaglio</title>
+		
+		<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
+		<link th:rel="stylesheet" th:href="@{/webjars/font-awesome/6.5.1/css/all.css}"/>
+	</head>
+
+	<body>
+		<div>
+			<img th:src="|/img/${contenuto.copertina}|" class="rounded float-start" alt="impossibile caricare la copertina">
+		</div>
+		
+	
+		<script th:src="@{/webjars/bootstrap/5.3.2/css/bootstrap.bundle.min.js}"></script>
+	</body>
+</html>

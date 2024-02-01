@@ -5,12 +5,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.generation.italy.netfliz.model.Attore;
+import org.generation.italy.netfliz.model.Contenuto;
 import org.generation.italy.netfliz.model.Regista;
 import org.generation.italy.netfliz.repository.RegistaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -84,11 +89,6 @@ public class RegistaRestController {
 		List<Regista> elencoRegisti = registaRepository.findRegistiSenzaContenuti();
 		return elencoRegisti;
 	}
-//---------------------------------------------------------------------------------------------------------------	
-	@PostMapping("/addRegista")
-	public void addRegista(	@RequestParam Object nuovoRegista) {
-		
-	}
 //----------------------------------------------------------------------------------------------------------------	
 	@GetMapping("{id}")
 	public Regista dettaglioRegista(@PathVariable Integer id) {
@@ -98,4 +98,38 @@ public class RegistaRestController {
 		else
 			return null;
 	}
+//----------------------------------------------------------------------------------------------------------------		
+	@PostMapping
+	public Regista inserisciRegista (@RequestBody Regista regista) {
+		return registaRepository.save(regista);
+	}
+//----------------------------------------------------------------------------------------------------------------	
+
+	@PutMapping("{id}")
+	public Regista aggiornaRegista(@PathVariable Integer id, @RequestBody Regista regista) {
+		Optional<Regista> results = registaRepository.findById(id);
+		if(results.isPresent()) {
+			Regista r = results.get();
+			if(regista.getCognome()!=null)
+				r.setCognome(regista.getCognome());
+			if(regista.getElencoContenuti()!=null)	
+				r.setElencoContenuti(regista.getElencoContenuti());
+			if(regista.getNazionalita()!=null)		
+				r.setNazionalita(regista.getNazionalita());
+			if(regista.getNome()!=null)		
+				r.setNome(regista.getNome());
+			
+			
+			return registaRepository.save(r);	
+		}
+		else
+			return null;
+	}		
+//----------------------------------------------------------------------------------------------------------------	
+	@DeleteMapping("{id}")
+	public void eliminaRegista(@PathVariable Integer id) {
+		registaRepository.deleteById(id);
+	}
+	
+	
 }

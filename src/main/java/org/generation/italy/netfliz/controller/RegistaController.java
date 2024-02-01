@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
 
+import org.generation.italy.netfliz.model.Attore;
+import org.generation.italy.netfliz.model.Contenuto;
 import org.generation.italy.netfliz.model.Regista;
 import org.generation.italy.netfliz.repository.RegistaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,25 +84,33 @@ public class RegistaController {
 		StringBuilder elencoRegistiBuilder = new StringBuilder();
 		elencoRegistiBuilder.append("Registi trovati: " + elencoRegisti.size());
 		elencoRegistiBuilder.append("<br><br>");
-		for(Regista r:elencoRegisti)
-			elencoRegistiBuilder.append(r.toString() + "<br>");
-		
+		for(Regista r: elencoRegisti) {
+			elencoRegistiBuilder.append("<br>" + r.toString() + "<br>");
+			for(Contenuto c: r.getElencoContenuti()) {
+				elencoRegistiBuilder.append("------------" + c.toString()+"<br>");
+				for(Attore a: c.getElencoAttori() )
+					elencoRegistiBuilder.append("-----------------------" + a.toString()+"<br>");
+			}	
+		}		
 		return elencoRegistiBuilder.toString();
 	}
 //--------------------------------------------------------------------------------------------------------------	
-	
-	
-	
 	@GetMapping("{id}")
 	@ResponseBody
 	public String dettaglioRegista(@PathVariable Integer id) {
 		Optional<Regista> optRegista = registaRepository.findById(id);
-		if(optRegista.isPresent())
-			return optRegista.get().toString();
+		if (optRegista.isPresent()) {	//il prodotto è stato trovato
+			Regista r = optRegista.get();
+			StringBuilder elenco=new StringBuilder(r.toString()+"<br>");
+			elenco.append("Contenuti: <br>");
+			for(Contenuto c: r.getElencoContenuti())
+				elenco.append("--"+c.toString()+"<br>");
+			elenco.append("<br>");
+			return elenco.toString();
+		}
 		else
-			return "Regista non disponibile!";
+			return "Prodotto non trovato!";
 	}
-	
 	
 	
 }
