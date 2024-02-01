@@ -6,17 +6,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
 
+import java.util.List;
 import org.generation.italy.netfliz.model.Attore;
 import org.generation.italy.netfliz.model.Contenuto;
+import org.generation.italy.netfliz.repository.AttoriRepository;
 import org.generation.italy.netfliz.repository.ContenutiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.PostMapping;
+
 
 @Controller
 @RequestMapping("/Contenuti")
@@ -24,13 +28,8 @@ public class ContenutiController {
 
 	@Autowired
 	ContenutiRepository contenutiRepository;
-	
-	@GetMapping			//----- /Contenuti
-	
-	public String benvenuto() {
-		return "/contenuti/home";
-	}
-	
+	@Autowired
+	AttoriRepository attoriRepository;
 	
 	@GetMapping	("/elenco")		//----- /Contenuti/elencoProdotti
 	
@@ -93,10 +92,23 @@ public class ContenutiController {
 		model.addAttribute("elenco", elencoContenuti);
 		return "/contenuti/elenco";
 	}	
+//---------------------------------------------------------------------------------------------------------------
+	@GetMapping("/nuovoContenuto")
+	public String nuovoContenutoGet(Model model) {
+		Contenuto c=new Contenuto();
+		List<Attore> elencoAttori = attoriRepository.findAll();
+		model.addAttribute("elencoAttori", elencoAttori);
+		model.addAttribute("contenuto", c);
+		
+		return "/contenuti/nuovoContenuto";
+	}
 
-	
-	
-	
+	@PostMapping("/nuovo")
+	public String nuovoContenutoPost(@ModelAttribute("contenuto") Contenuto c) {
+		contenutiRepository.save(c);
+		
+		return "redirect:/Contenuti/elenco";
+	}
 	
 //---------------------------------------------------------------------------------------------------------------	
 	@GetMapping("/dettaglio/{id}")

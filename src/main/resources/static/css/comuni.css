@@ -1,1 +1,6 @@
-@charset "ISO-8859-1";
+@charset "UTF-8";
+
+.nav-pills .nav-link.active {
+    color: #fff;
+    background-color: #ab18a6;
+}	

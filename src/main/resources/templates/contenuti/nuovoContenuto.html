@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+	<title>Nuovo contenuto</title>
+	<meta th:replace="fragments/resources :: head">
+</head>
+<body>
+  <div class="container">
+	<nav th:replace="fragments/navbar :: navbar('contenuti')"></nav>	
+
+	<h1>Nuovo contenuto</h1>
+	<hr>	
+	<form 
+		id="form-contenuto"
+		th:action="@{/Contenuti/nuovoContenuto}"
+		th:object="${contenuto}"
+		method="post">
+		
+		<div class="row">
+			<div class="col-4">
+				<label class="form-label" for="titolo">Titolo</label>
+				<input type="text" class="form-control" id="nome" th:field="*{titolo}">	
+				
+				<label class="form-label" for="genere">Genere</label>
+				<input type="text" class="form-control" id="genere" th:field="*{genere}">	
+				
+				<label class="form-label" for="tipologia">Tipologia</label>
+				<input type="text" class="form-control" id="tipologia" th:field="*{tipologia}">	
+				
+				<label class="form-label" for="immagine">Immagine</label>
+				<input type="text" class="form-control" id="immagine" th:field="*{immagine}">		
+				
+				<label class="form-label" for="regista">Regista</label>
+				<select class="form-select" th:field="*{regista}" >
+					<option th:each="f : ${elencoRegisti}" th:value="${f.id}" th:text="${f.id}"></option>
+				</select>	
+			</div>	
+			
+		</div>
+		<div class="row mt-3">
+			<div class="col-2">
+				<button class="btn btn-success" type="submit">Salva</button>
+			</div>	
+		</div>
+	</form>
+	
+  </div>
+  <script th:replace="fragments/resources :: scripts"></script>
+</body>
+</html>

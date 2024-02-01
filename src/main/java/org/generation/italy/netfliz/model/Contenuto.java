@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.generation.italy.netfliz.model.Contenuto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,7 +19,7 @@ public class Contenuto implements Comparable<Contenuto> {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 		private	int id;
 	
-	@Column(nullable = false, length = 50)
+	@Column(nullable = false, length = 60)
 		private String titolo;
 	@Column(nullable = false, length = 60)
 		private String tipologia;

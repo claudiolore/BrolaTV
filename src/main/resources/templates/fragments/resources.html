@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+    <th:block th:fragment="head">
+	    <meta charset="UTF-8">
+	    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
+	    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/6.5.1/css/all.css} "/>
+	    <link th:rel="stylesheet" href="/css/main.css">
+    </th:block>	
+</head>
+
+<body th:fragment="body" >
+    <script th:fragment="scripts" th:src="@{/webjars/bootstrap/5.3.2/css/bootstrap.bundle.min.js}"></script>
+
+</body>
+</html>

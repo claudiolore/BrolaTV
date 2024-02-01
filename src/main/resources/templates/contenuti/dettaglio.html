@@ -1,19 +1,46 @@
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html xmlns:th="http://www.thymeleaf.org/">
-	<head>
-		<meta charset="UTF-8">
-		<title>Dettaglio</title>
-		
-		<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
-		<link th:rel="stylesheet" th:href="@{/webjars/font-awesome/6.5.1/css/all.css}"/>
-	</head>
-
-	<body>
-		<div>
-			<img th:src="|/img/${contenuto.copertina}|" class="rounded float-start" alt="impossibile caricare la copertina">
+<head>	
+	<title>Dettaglio Contenuto</title>
+	<meta th:replace="fragments/resources :: head">
+</head>
+<body>
+	<div class="container">
+		<nav th:replace="fragments/navbar :: navbar('contenuti')"></nav>	
+		<div class="row">
+			<h1 th:text="${contenuto.titolo}"></h1>
+			<hr>
+			<!-- in totale ho 12 "spazi" -->
+			<div class="col-8">
+			<!-- questo div occupa 8 spazi (2/3 dello schermo) -->
+				<dl>
+					<dt>Id</dt>
+				<dd th:text="${contenuto.id}">
+					<dt>Titolo</dt>
+				<dd th:text="${contenuto.titolo}">
+					<dt>Genere</dt>
+				<dd th:text="${contenuto.genere}">
+					<dt>Tipologia</dt>
+				<dd th:text="${contenuto.tipologia}">
+					<dt>Anno di Uscita</dt>
+				<dd th:text="${contenuto.anno}">
+					<dt>Durata</dt>
+				<dd th:text="${contenuto.durata}">
+					<dt>Regista</dt>
+				<dd th:text="|${contenuto.regista.nome} ${contenuto.regista.cognome}|">
+				</dl>
+			</div>
+			<div class="col-4" th:if="${contenuto.copertina!=null}">
+			<!-- questo div occupa 4 spazi (1/3 dello schermo) -->
+				<img th:if="${contenuto.copertina.contains('http')}" class="img-fluid" th:src="${contenuto.copertina}">
+				<img th:if="${!contenuto.copertina.contains('http')}" class="img-fluid" th:src="|/img/${contenuto.copertina}|">
+			</div>
+			
+			
 		</div>
 		
-	
-		<script th:src="@{/webjars/bootstrap/5.3.2/css/bootstrap.bundle.min.js}"></script>
-	</body>
+		
+	</div>
+	<script th:replace="fragments/resources :: scripts"></script>
+</body>
 </html>
