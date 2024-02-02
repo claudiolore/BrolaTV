@@ -31,6 +31,12 @@ public class ContenutiController {
 	@Autowired
 	AttoriRepository attoriRepository;
 	
+	@GetMapping
+	public String benvenuto() {
+		return "/contenuti/Benvenuto";
+	}
+	
+
 	@GetMapping	("/elenco")		//----- /Contenuti/elencoProdotti
 	
 	public String elencoContenuti(
