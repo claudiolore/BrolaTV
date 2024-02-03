@@ -31,7 +31,6 @@ public class AttoriController {
 	ContenutiRepository contenutiRepository;	
 //---------------------------------------------------------------------------------------------------------------	
 	@GetMapping("/elenco")
-	@ResponseBody
 	public String elencoAttori(	Model model,
 		@RequestParam String nome,
 		@RequestParam String cognome,
@@ -76,7 +75,7 @@ public class AttoriController {
 }
 
 //---------------------------------------------------------------------------------------------------------------
-	@GetMapping("/nuovoAttore")
+	@GetMapping("/nuovo")
 	public String nuovoAttoreGet(Model model) {
 		Attore a=new Attore();
 		List<Contenuto> elencoContenuti = contenutiRepository.findAll();
@@ -86,7 +85,7 @@ public class AttoriController {
 		return "/attori/nuovo//---------------------------------------------------------------------------------------------------------------";
 	}
 
-	@PostMapping("/nuovoAttore")
+	@PostMapping("/nuovo")
 	public String nuovoAttorePost(@ModelAttribute("attore") Attore a) {
 		attoriRepository.save(a);
 		
@@ -111,7 +110,7 @@ public class AttoriController {
 			return "/attori/modifica";
 		}
 		else
-			return "nontrovato";
+			return "/nontrovato";
 	}
 	
 	@PostMapping("/modifica")		
@@ -130,7 +129,7 @@ public class AttoriController {
 				return "redirect:/Contenuti/elenco";	
 			}
 			else
-				return "nontrovato";
+				return "/nontrovato";
 		}
 
 

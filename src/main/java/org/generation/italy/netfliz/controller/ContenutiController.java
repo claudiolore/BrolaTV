@@ -107,7 +107,7 @@ public class ContenutiController {
 }
 
 //---------------------------------------------------------------------------------------------------------------
-	@GetMapping("/nuovoContenuto")
+	@GetMapping("/nuovo")
 	public String nuovoContenutoGet(Model model) {
 		Contenuto c=new Contenuto();
 		List<Attore> elencoAttori = attoriRepository.findAll();
@@ -117,7 +117,7 @@ public class ContenutiController {
 		return "/contenuti/nuovoContenuto";
 	}
 
-	@PostMapping("/nuovoContenuto")
+	@PostMapping("/nuovo")
 	public String nuovoContenutoPost(@ModelAttribute("contenuto") Contenuto c) {
 		contenutiRepository.save(c);
 		
@@ -127,8 +127,7 @@ public class ContenutiController {
 //---------------------------------------------------------------------------------------------------------------	
 	
 	@GetMapping("/modifica/{id}")			
-	public String modificaContenutoGet(Model model, 
-										@PathVariable("id") Integer id) {
+	public String modificaContenutoGet(Model model, @PathVariable("id") Integer id) {
 		
 		Optional<Contenuto> optContenuto=contenutiRepository.findById(id);
 		if (optContenuto.isPresent())		

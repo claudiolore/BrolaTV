@@ -13,7 +13,7 @@
 		<nav th:replace="fragments/navbar :: navbar('contenuti')"></nav>
 	</div>
 	
-	<div>
+	<div class="container">
 	<h1>Elenco Contenuti</h1>
 		<hr>
 		<!-- creo la struttura della tabella prodotti -->
@@ -27,26 +27,33 @@
 			<!-- intestazione della tabella -->
 			<thead>
 				<tr>
-					<th></th>
 					<th>Id</th>
 					<th>Titolo</th>
 					<th>Regista</th>
 					<th>Genere</th>
 					<th>Tipologia</th>
 					<th>Attori</th>
+					<th></th>
+					<th></th>
+					<th></th>
 				</tr>
 			</thead>
 			
 			<tbody>
 				
 				<tr th:each="c: ${elenco}">
-					<td><a th:href="|/Contenuti/dettaglio/${c.id}|"><i class="fa-solid fa-film"></i></a></td>
 					<td th:text="${c.id}"></td>
 					<td th:text="${c.titolo}"></td>
 					<td th:text="|${c.regista.nome} ${c.regista.cognome}|"></td>
 					<td th:text="${c.genere}"></td>
 					<td th:text="${c.tipologia}"></td>
 					<td ><span th:each="a: ${c.elencoAttori}" th:text="|${a.nome} ${a.cognome}|"></span></td>
+					<td><a th:href="|/Contenuti/dettaglio/${c.id}|"><i class="fa-solid fa-eye td-button"
+						title="Mostra dettaglio"></i></a></td>
+					<td><a th:href="|/Contenuti/modifica/${c.id}|"><i class="fa-solid fa-pen-to-square td-button"
+						title="Modifica"></i></a></td>
+					<td><a th:href="|/Contenuti/elimina/${c.id}|" onclick="return confirm('Sei sicuro/a?')"><i
+						class="fa-solid fa-trash td-button" title="Elimina"></i></a></td>
 				</tr>
 			</tbody>  
 		</table>

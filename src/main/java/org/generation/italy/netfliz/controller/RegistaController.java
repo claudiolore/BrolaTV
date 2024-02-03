@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
@@ -64,7 +63,7 @@ public class RegistaController {
 			elencoRegisti = (ArrayList<Regista>) 
 							registaRepository.findByNomeAndCognomeAndNazionalita(nome, cognome, nazionalita);
 		else	
-			return "Inserimento non valido";
+			return "nonTrovato";
 		
 		
 		if(ordinamento!=null) {
@@ -73,14 +72,13 @@ public class RegistaController {
 			else if(ordinamento.equalsIgnoreCase("desc"))
 				Collections.sort(elencoRegisti, Collections.reverseOrder());
 			else
-				return "Ordinamento non valido";
+				return "nonTrovato";
 		}
 		model.addAttribute("elenco", elencoRegisti);
 		return "/registi/elenco";
 	}
 //--------------------------------------------------------------------------------------------------------------	
 	@GetMapping("{id}")
-	@ResponseBody
 	public String dettaglioRegista(Model model, @PathVariable Integer id) {
 		Optional<Regista> optRegista = registaRepository.findById(id);
 		if (optRegista.isPresent()) {	//il prodotto è stato trovato
@@ -88,11 +86,11 @@ public class RegistaController {
 			return "/registi/dettaglio";
 		}
 		else
-			return "/nonTrovato";
+			return "nonTrovato";
 	}
 	
 	//---------------------------------------------------------------------------------------------------------------
-	@GetMapping("/nuovoRegista")
+	@GetMapping("/nuovo")
 	public String nuovoRegistaGet(Model model) {
 		Regista r=new Regista();
 		model.addAttribute("Regista", r);
@@ -100,7 +98,7 @@ public class RegistaController {
 		return "/registi/nuovoRegista";
 	}
 
-	@PostMapping("/nuovoRegista")
+	@PostMapping("/nuovo")
 	public String nuovoContenutoPost(@ModelAttribute("regista") Regista r) {
 		registaRepository.save(r);
 		
