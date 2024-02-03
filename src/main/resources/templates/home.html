@@ -3,17 +3,23 @@
 <head>
 	<meta charset="UTF-8">
 	<title>NETFLIz</title>
+	<meta th:replace="fragments/resources :: head">   <!-- 	FRAMMENTI   -->
 </head>
 <body>
 	<div class="container">
+		<nav th:replace="fragments/navbar :: navbar('contenuti')"></nav>
+	</div>
+	<div class="container">
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-7">
 				<img src="/img/logoNetfliz.png" class="img-fluid" alt="Descrizione immagine">
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-5">
 				<p>
-					<h1>NETFLIz</h1>
-					<h2>Benvenuto nella miglior Piattaforma Streaming di roma sud</h2>
+					<br><br><br>
+					<h1 class="text-center display-1">NETFLIz</h1>
+					<br><br><br>
+					<h2 class="text-center">Benvenuto nella miglior Piattaforma Streaming di ROMA-NORD</h2>
 				</p>
 			</div>
 		</div>

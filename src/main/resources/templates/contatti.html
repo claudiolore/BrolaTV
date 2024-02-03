@@ -2,9 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Contatti</title>
+<meta th:replace="fragments/resources :: head">   <!-- 	FRAMMENTI   -->
 </head>
 <body>
+	<div class="container">
+		<nav th:replace="fragments/navbar :: navbar('contenuti')"></nav>
+	</div>
 	mail: info@netfliz.com
 	tel: 02 33223121
 </body>
