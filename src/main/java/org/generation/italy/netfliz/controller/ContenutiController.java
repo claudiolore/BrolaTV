@@ -30,6 +30,7 @@ public class ContenutiController {
 	ContenutiRepository contenutiRepository;
 	@Autowired
 	AttoriRepository attoriRepository;
+
 	
 	@GetMapping
 	public String benvenuto() {
@@ -118,16 +119,55 @@ public class ContenutiController {
 	
 //---------------------------------------------------------------------------------------------------------------	
 	@GetMapping("/dettaglio/{id}")
-	public String dettaglioContenuto(@PathVariable Integer id,
-										Model model) {
+	public String dettaglioContenuto(Model model, 
+										@PathVariable Integer id) {
 		Optional<Contenuto> optContenuto=contenutiRepository.findById(id);
-		if (optContenuto.isPresent()) {	//il prodotto è stato trovato
+		if (optContenuto.isPresent()) {	//il contenuto è stato trovato
 			model.addAttribute("contenuto", optContenuto.get());
 			return "/contenuti/dettaglio";
 		}
 		else
-			return "/contenuti/nonTrovato";
+			return "/nonTrovato";
 	}
 	
+//---------------------------------------------------------------------------------------------------------------
+	@GetMapping("/modifica/{id}")			
+	public String modificaContenutoGet(Model model, 
+										@PathVariable("id") Integer id) {
+		
+		Optional<Contenuto> optContenuto=contenutiRepository.findById(id);
+		if (optContenuto.isPresent())		
+		{
+			Contenuto c= optContenuto.get();
+		
+			List<Attore> elencoAttori=attoriRepository.findByOrderByNome();
+		
+			model.addAttribute("elencoAttori", elencoAttori);
+			model.addAttribute("contenuto", c);
+			return "/contenuti/modifica";
+		}
+		else
+			return "nontrovato";
+	}
 	
+	@PostMapping("/modifica")		
+	public String modificaContenutoPost(@ModelAttribute("contenuto") Contenuto c ) {	
+		contenutiRepository.save(c);
+		
+		return "redirect:/Contenuti/elenco";		
+	}
+//---------------------------------------------------------------------------------------------------------------
+	@GetMapping("/elimina/{id}")	
+	public String eliminaContenuto(	@PathVariable Integer id) {
+			Optional<Contenuto> optContenuto=contenutiRepository.findById(id);
+			if (optContenuto.isPresent())		
+			{
+				contenutiRepository.deleteById(id);
+				return "redirect:/Prodotti/elenco";	
+			}
+			else
+				return "nontrovato";
+		}
+
+
 }

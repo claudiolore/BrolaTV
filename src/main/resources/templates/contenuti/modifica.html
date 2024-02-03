@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+	<title>Modifica Contenuto</title>
+	<meta th:replace="fragments/resources :: head">
+</head>
+<body>
+  <div class="container">
+	<nav th:replace="fragments/navbar :: navbar('contenuti')"></nav>	
+
+	<h1>Modifica contenuto</h1>
+	<hr>	
+	<form 
+		id="form-contenuto"
+		th:action="@{/Contenuti/modifica}"
+		th:object="${contenuto}"
+		method="post">
+		
+		<input type="hidden" th:field="*{id}">
+		<div class="row">
+			<div class="col-4">
+				<label class="form-label" for="titolo">Titolo</label>
+				<input type="text" class="form-control" id="titolo" th:field="*{titolo}">	
+				
+				<label class="form-label" for="genere">Genere</label>
+				<input type="text" class="form-control" id="genere" th:field="*{genere}">	
+				
+				<label class="form-label" for="tipologia">Tipologia</label>
+				<input type="text" class="form-control" id="tipologia" th:field="*{tipologia}">	
+				
+				<label class="form-label" for="anno">Anno</label>
+				<input type="text" class="form-control" id="anno" th:field="*{anno}">	
+                
+                <label class="form-label" for="durata">Durata</label>
+				<input type="text" class="form-control" id="durata" th:field="*{durata}">	
+                
+                <label class="form-label" for="copertina">Copertina</label>
+				<input type="text" class="form-control" id="copertina" th:field="*{copertina}">	
+				
+				<label class="form-label" for="attore">Attore</label>
+				<select class="form-select" th:field="*{attore}" >
+					<option th:each="f : ${elencoAttori}" th:value="${a.id}" th:text="|${a.nome} ${a.cognome}|"></option>
+				</select>	
+			</div>	
+			
+		</div>
+		<div class="row mt-3">
+			<div class="col-2">
+				<button class="btn btn-success" type="submit"><i class="fa-solid fa-check"></i> Salva</button>
+				<a class="btn btn-success" th:href="@{/Contenuti/elenco}"><i class="fa-solid fa-xmark"></i> Annulla</a>
+			</div>	
+		</div>
+	</form>
+	
+  </div>
+  <script th:replace="fragments/resources :: scripts"></script>
+</body>
+</html>
