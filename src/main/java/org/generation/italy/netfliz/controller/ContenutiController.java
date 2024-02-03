@@ -28,19 +28,12 @@ public class ContenutiController {
 
 	@Autowired
 	ContenutiRepository contenutiRepository;
+	
 	@Autowired
 	AttoriRepository attoriRepository;
-
-	
-	@GetMapping
-	public String benvenuto() {
-		return "/contenuti/Benvenuto";
-	}
-	
-
+//--------------------------------------------------------------------------------------------------
 	@GetMapping	("/elenco")		//----- /Contenuti/elencoProdotti
-	
-	public String elencoContenuti(
+		public String elencoContenuti(
 		Model model,
 		@RequestParam(required = false) String titolo, 
 		@RequestParam(required = false) String tipologia,
@@ -100,6 +93,20 @@ public class ContenutiController {
 		return "/contenuti/elenco";
 	}	
 //---------------------------------------------------------------------------------------------------------------
+	@GetMapping("/dettaglio/{id}")
+	public String dettaglioContenuto(Model model, 
+										@PathVariable Integer id) {
+		Optional<Contenuto> optContenuto=contenutiRepository.findById(id);
+		if (optContenuto.isPresent()) {	//il contenuto è stato trovato
+			
+			model.addAttribute("contenuto", optContenuto.get());
+			return "/contenuti/dettaglio";
+		}
+		else
+			return "/nonTrovato";
+}
+
+//---------------------------------------------------------------------------------------------------------------
 	@GetMapping("/nuovoContenuto")
 	public String nuovoContenutoGet(Model model) {
 		Contenuto c=new Contenuto();
@@ -110,7 +117,7 @@ public class ContenutiController {
 		return "/contenuti/nuovoContenuto";
 	}
 
-	@PostMapping("/nuovo")
+	@PostMapping("/nuovoContenuto")
 	public String nuovoContenutoPost(@ModelAttribute("contenuto") Contenuto c) {
 		contenutiRepository.save(c);
 		
@@ -118,19 +125,7 @@ public class ContenutiController {
 	}
 	
 //---------------------------------------------------------------------------------------------------------------	
-	@GetMapping("/dettaglio/{id}")
-	public String dettaglioContenuto(Model model, 
-										@PathVariable Integer id) {
-		Optional<Contenuto> optContenuto=contenutiRepository.findById(id);
-		if (optContenuto.isPresent()) {	//il contenuto è stato trovato
-			model.addAttribute("contenuto", optContenuto.get());
-			return "/contenuti/dettaglio";
-		}
-		else
-			return "/nonTrovato";
-	}
 	
-//---------------------------------------------------------------------------------------------------------------
 	@GetMapping("/modifica/{id}")			
 	public String modificaContenutoGet(Model model, 
 										@PathVariable("id") Integer id) {
@@ -163,7 +158,7 @@ public class ContenutiController {
 			if (optContenuto.isPresent())		
 			{
 				contenutiRepository.deleteById(id);
-				return "redirect:/Prodotti/elenco";	
+				return "redirect:/Contenuti/elenco";	
 			}
 			else
 				return "nontrovato";

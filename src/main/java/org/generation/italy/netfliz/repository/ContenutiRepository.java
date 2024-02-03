@@ -32,4 +32,7 @@ public interface ContenutiRepository extends JpaRepository<Contenuto, Integer> {
 	List<Contenuto> findByTitoloLike(String titolo);
 	
 	List<Contenuto> findByAnnoBetween(int annoInizio, int annoFine);
+
+
+	List<Contenuto> findByOrderByTitolo();
 }

@@ -6,17 +6,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
 
-import org.generation.italy.netfliz.model.Attore;
-import org.generation.italy.netfliz.model.Contenuto;
 import org.generation.italy.netfliz.model.Regista;
 import org.generation.italy.netfliz.repository.RegistaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 @Controller
 @RequestMapping("/Registi")
@@ -24,18 +26,10 @@ public class RegistaController {
 
 	@Autowired
 	RegistaRepository registaRepository;
-//--------------------------------------------------------------------------------------------------
-	
-	@GetMapping			//----- /Registi
-	@ResponseBody
-	public String benvenuto() {
-		return "Benvenuto su registi!";
-	}
+
 //-----------------------------------------------------------------------------------------------------
-	
 	@GetMapping("/elenco")
-	@ResponseBody
-	public String elencoRegisti(
+	public String elencoRegisti(Model model,
 		@RequestParam(required = false) String ordinamento,
 		@RequestParam(required = false) String nome,
 		@RequestParam(required = false) String cognome,
@@ -81,36 +75,74 @@ public class RegistaController {
 			else
 				return "Ordinamento non valido";
 		}
-		StringBuilder elencoRegistiBuilder = new StringBuilder();
-		elencoRegistiBuilder.append("Registi trovati: " + elencoRegisti.size());
-		elencoRegistiBuilder.append("<br><br>");
-		for(Regista r: elencoRegisti) {
-			elencoRegistiBuilder.append("<br>" + r.toString() + "<br>");
-			for(Contenuto c: r.getElencoContenuti()) {
-				elencoRegistiBuilder.append("------------" + c.toString()+"<br>");
-				for(Attore a: c.getElencoAttori() )
-					elencoRegistiBuilder.append("-----------------------" + a.toString()+"<br>");
-			}	
-		}		
-		return elencoRegistiBuilder.toString();
+		model.addAttribute("elenco", elencoRegisti);
+		return "/registi/elenco";
 	}
 //--------------------------------------------------------------------------------------------------------------	
 	@GetMapping("{id}")
 	@ResponseBody
-	public String dettaglioRegista(@PathVariable Integer id) {
+	public String dettaglioRegista(Model model, @PathVariable Integer id) {
 		Optional<Regista> optRegista = registaRepository.findById(id);
 		if (optRegista.isPresent()) {	//il prodotto è stato trovato
-			Regista r = optRegista.get();
-			StringBuilder elenco=new StringBuilder(r.toString()+"<br>");
-			elenco.append("Contenuti: <br>");
-			for(Contenuto c: r.getElencoContenuti())
-				elenco.append("--"+c.toString()+"<br>");
-			elenco.append("<br>");
-			return elenco.toString();
+			model.addAttribute("regista", optRegista.get());
+			return "/registi/dettaglio";
 		}
 		else
-			return "Prodotto non trovato!";
+			return "/nonTrovato";
 	}
 	
+	//---------------------------------------------------------------------------------------------------------------
+	@GetMapping("/nuovoRegista")
+	public String nuovoRegistaGet(Model model) {
+		Regista r=new Regista();
+		model.addAttribute("Regista", r);
+		
+		return "/registi/nuovoRegista";
+	}
+
+	@PostMapping("/nuovoRegista")
+	public String nuovoContenutoPost(@ModelAttribute("regista") Regista r) {
+		registaRepository.save(r);
+		
+		return "redirect:/Contenuti/elenco";
+	}
 	
+//---------------------------------------------------------------------------------------------------------------	
+	
+	@GetMapping("/modifica/{id}")			
+	public String modificaRegistaGet(Model model, @PathVariable("id") Integer id) {
+		
+		Optional<Regista> optRegista=registaRepository.findById(id);
+		if (optRegista.isPresent())		
+		{
+			Regista r= optRegista.get();
+		
+			model.addAttribute("regista", r);
+			return "/regista/modifica";
+		}
+		else
+			return "nontrovato";
+	}
+
+	@PostMapping("/modifica")		
+	public String modificaRegistaPost(@ModelAttribute("regista") Regista r ) {	
+		registaRepository.save(r);
+		
+		return "redirect:/Registi/elenco";		
+	}
+//---------------------------------------------------------------------------------------------------------------
+	@GetMapping("/elimina/{id}")	
+	public String eliminaRegista(	@PathVariable Integer id) {
+			Optional<Regista> optRegista=registaRepository.findById(id);
+			if (optRegista.isPresent())		
+			{
+				registaRepository.deleteById(id);
+				return "redirect:/Registi/elenco";	
+			}
+			else
+				return "nontrovato";
+		}
+
+
 }
+

@@ -19,8 +19,7 @@ public interface RegistaRepository extends JpaRepository<Regista, Integer>{
 	List<Regista> findByNomeAndNazionalita(String nome, String nazionalita);
 	List<Regista> findByCognomeAndNazionalita(String cognome, String nazionalita);
 	
-	List<Regista> findByNomeAndCognomeAndNazionalita
-					(String nome, String cognome, String nazionalita);
+	List<Regista> findByNomeAndCognomeAndNazionalita(String nome, String cognome, String nazionalita);
 	
 	@Query(value = " select  regista.* "
 			 +" from regista left join contenuto"
