@@ -86,7 +86,6 @@ public class Contenuto implements Comparable<Contenuto> {
 		return regista;
 	}
 	
-	
 	public String getCopertina() {
 		return copertina;
 	}
@@ -117,6 +116,10 @@ public class Contenuto implements Comparable<Contenuto> {
 
 	public void setElencoAttori(List<Attore> elencoAttori) {
 		this.elencoAttori = elencoAttori;
+	}
+	
+	public void setCopertina(String copertina) {
+		this.copertina = copertina;
 	}
 
 	//----------------------------------------------------------------------------------------------------------------	

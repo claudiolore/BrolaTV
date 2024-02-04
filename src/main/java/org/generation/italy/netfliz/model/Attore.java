@@ -25,6 +25,7 @@ public class Attore implements Comparable<Attore> {
 	@Column(nullable=false)
 	private Integer annoDiNascita;
 	
+	private String immagine;
 	@JsonBackReference
 	@ManyToMany
 	private List<Contenuto> elencoContenuti;	
@@ -66,9 +67,10 @@ public class Attore implements Comparable<Attore> {
 		return elencoContenuti;
 	}
 	
-	
+	public String getImmagine() {
+		return immagine;
+	}
 //----------------------------------------------------------------------------------------------------------------	
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -88,6 +90,13 @@ public class Attore implements Comparable<Attore> {
 	public void setElencoContenuti(List<Contenuto> elencoContenuti) {
 		this.elencoContenuti = elencoContenuti;
 	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public void setImmagine(String immagine) {
+		this.immagine = immagine;
+	}
+	
 //----------------------------------------------------------------------------------------------------------------	
 
 	@Override
@@ -102,8 +111,9 @@ public class Attore implements Comparable<Attore> {
 	public int compareTo(Attore attore) {		
 		return (this.nome+this.cognome).compareTo(attore.getNome()+attore.getCognome());
 	}
+
 	
-	
+
 	
 	
 	

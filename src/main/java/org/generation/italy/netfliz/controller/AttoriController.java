@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/Attori")
@@ -32,11 +31,11 @@ public class AttoriController {
 //---------------------------------------------------------------------------------------------------------------	
 	@GetMapping("/elenco")
 	public String elencoAttori(	Model model,
-		@RequestParam String nome,
-		@RequestParam String cognome,
-		@RequestParam String nazionalita,
-		@RequestParam Integer annoDiNascita,
-		@RequestParam String ordinamento) throws Exception{
+		@RequestParam(required=false) String nome,
+		@RequestParam(required=false) String cognome,
+		@RequestParam(required=false) String nazionalita,
+		@RequestParam(required=false) Integer annoDiNascita,
+		@RequestParam(required=false) String ordinamento) throws Exception{
 			
 		ArrayList<Attore> elencoAttori = null;
 		if		(nome==null && cognome==null && nazionalita==null && annoDiNascita==null)
@@ -59,6 +58,7 @@ public class AttoriController {
 				return "Ordinamento non valido";	
 		}
 		model.addAttribute("elenco", elencoAttori);
+
 		return "/attori/elenco";
 	}	
 //---------------------------------------------------------------------------------------------------------------
@@ -82,7 +82,7 @@ public class AttoriController {
 		model.addAttribute("elencoContenuti", elencoContenuti);
 		model.addAttribute("attore", a);
 		
-		return "/attori/nuovo//---------------------------------------------------------------------------------------------------------------";
+		return "/attori/nuovo";
 	}
 
 	@PostMapping("/nuovo")
@@ -126,7 +126,7 @@ public class AttoriController {
 			if (optAttore.isPresent())		
 			{
 				contenutiRepository.deleteById(id);
-				return "redirect:/Contenuti/elenco";	
+				return "redirect:/Attori/elenco";	
 			}
 			else
 				return "/nontrovato";

@@ -23,6 +23,8 @@ public class Regista implements Comparable<Regista>{
 	@Column(nullable = false, length = 50)
 	private String nazionalita;
 	
+	private String immagine;
+
 	@JsonBackReference
 	@OneToMany(mappedBy = "regista")		
 	List<Contenuto> elencoContenuti;	
@@ -75,6 +77,15 @@ public class Regista implements Comparable<Regista>{
 
 	public void setElencoContenuti(List<Contenuto> elencoContenuti) {
 		this.elencoContenuti = elencoContenuti;
+	}
+	
+
+	public String getImmagine() {
+		return immagine;
+	}
+
+	public void setImmagine(String immagine) {
+		this.immagine = immagine;
 	}
 
 	//----------------------------------------------------------------------------------------------------------------	

@@ -3,24 +3,24 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Elenco Contenuti</title>
+	<title>Elenco Attori</title>
 
 	<meta th:replace="fragments/resources :: head">   <!-- 	FRAMMENTI   -->
 </head>
 
 <body class="bg-success.bg-gradient">
 	<div class="container">
-		<nav th:replace="fragments/navbar :: navbar('contenuti')"></nav>
+		<nav th:replace="fragments/navbar :: navbar('attori')"></nav>
 	</div>
 	
 	<div class="container">
-	<h1>Elenco Contenuti</h1>
+	<h1>Elenco Attori</h1>
 		<hr>
 		<!-- creo la struttura della tabella prodotti -->
 		<!-- la tabella verrà visualizzata solo se l'elenco dei prodotti ha una dimensione >0 -->
 
 		<div class="alert alert-primary" role="alert" th:if="${elenco.size()==0}">
-			<h3>Nessun Contenuto trovato</h3>
+			<h3>Nessun Attore trovato</h3>
 		</div>
 
 		<table class="table table-success table-striped" th:if="${elenco.size()>0}">
@@ -28,29 +28,31 @@
 			<thead>
 				<tr>
 					<th>Id</th>
-					<th>Titolo</th>
-					<th>Regista</th>
-					<th>Genere</th>
-					<th>Tipologia</th>
+					<th>Nome</th>
+					<th>Cognome</th>
+					<th>Nazionalita</th>
+					<th>Anno Di Nascita</th>
+		<!-- <th>Contenuti</th> -->
 					<th></th>
 					<th></th>
-					<th></th>
+                    <th></th>
 				</tr>
 			</thead>
 			
 			<tbody>
 				
-				<tr th:each="c: ${elenco}">
-					<td th:text="${c.id}"></td>
-					<td th:text="${c.titolo}"></td>
-					<td th:text="|${c.regista.nome} ${c.regista.cognome}|"></td>
-					<td th:text="${c.genere}"></td>
-					<td th:text="${c.tipologia}"></td>
-					<td><a th:href="|/Contenuti/dettaglio/${c.id}|"><i class="fa-solid fa-eye td-button"
+				<tr th:each="a: ${elenco}">
+					<td th:text="${a.id}"></td>
+					<td th:text="${a.nome}"></td>
+					<td th:text="${a.cognome}"></td>
+					<td th:text="${a.nazionalita}"></td>
+					<td th:text="${a.annoDiNascita}"></td>
+		<!-- <td ><span th:each="a: ${a.elencoContenuti}" th:text="${a.elencoContenuti.get().titolo}"></span></td> -->
+					<td><a th:href="|/Attori/dettaglio/${a.id}|"><i class="fa-solid fa-eye td-button"
 						title="Mostra dettaglio"></i></a></td>
-					<td><a th:href="|/Contenuti/modifica/${c.id}|"><i class="fa-solid fa-pen-to-square td-button"
+					<td><a th:href="|/Attori/modifica/${a.id}|"><i class="fa-solid fa-pen-to-square td-button"
 						title="Modifica"></i></a></td>
-					<td><a th:href="|/Contenuti/elimina/${c.id}|" onclick="return confirm('Sei sicuro/a?')"><i
+					<td><a th:href="|/Attori/elimina/${a.id}|" onclick="return confirm('Sei sicuro/a?')"><i
 						class="fa-solid fa-trash td-button" title="Elimina"></i></a></td>
 				</tr>
 			</tbody>  

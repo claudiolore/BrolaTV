@@ -1,0 +1,41 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>	
+	<title>Dettaglio Attore</title>
+	<meta th:replace="fragments/resources :: head">
+</head>
+<body>
+	<div class="container">
+		<nav th:replace="fragments/navbar :: navbar('attori')"></nav>	
+		<div class="row">
+			<h1 th:text="|${attore.nome} ${attore.cognome}|"></h1>
+			<hr>
+			<!-- in totale ho 12 "spazi" -->
+			<div class="col-6">
+			<!-- questo div occupa 8 spazi (2/3 dello schermo) -->
+				<dl>
+					<dt>Id</dt>
+				<dd th:text="${attore.id}">
+					<dt>Nazionalita</dt>
+				<dd th:text="${attore.nazionalita}">
+					<dt>Anno di Nascita</dt>
+				<dd th:text="${attore.annoDiNascita}">
+				
+             	<!-- <dt>contenuti</dt>
+				<dd th:text=""> -->
+				</dl>
+			</div>
+			<div class="col-6" th:if="${attore.immagine!=null}">
+			<!-- questo div occupa 4 spazi (1/3 dello schermo) -->
+				<img th:if="${attore.immagine.contains('http')}" class="img-fluid" th:src="${attore.immagine}">
+				<img th:if="${!attore.immagine.contains('http')}" class="img-fluid" th:src="|/img/${attore.immagine}|">
+			</div>
+			
+			
+		</div>
+		
+		
+	</div>
+	<script th:replace="fragments/resources :: scripts"></script>
+</body>
+</html>

@@ -38,9 +38,9 @@
 				<input type="text" class="form-control" id="copertina" th:field="*{copertina}">	
 				
 				<label class="form-label" for="attore">Attore</label>
-				<select class="form-select" th:field="*{attore}" >
-					<option th:each="f : ${elencoAttori}" th:value="${a.id}" th:text="|${a.nome} ${a.cognome}|"></option>
-				</select>	
+				<!-- <select class="form-select" th:field="*{attore}" >
+					<option th:each="a : ${elencoAttori}" th:value="${a.id}" th:text="|${a.nome} ${a.cognome}|"></option>
+				</select>	 -->
 			</div>	
 			
 		</div>

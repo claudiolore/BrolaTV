@@ -3,24 +3,24 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Elenco Contenuti</title>
+	<title>Elenco Registi</title>
 
 	<meta th:replace="fragments/resources :: head">   <!-- 	FRAMMENTI   -->
 </head>
 
 <body class="bg-success.bg-gradient">
 	<div class="container">
-		<nav th:replace="fragments/navbar :: navbar('contenuti')"></nav>
+		<nav th:replace="fragments/navbar :: navbar('registi')"></nav>
 	</div>
 	
 	<div class="container">
-	<h1>Elenco Contenuti</h1>
+	<h1>Elenco Registi</h1>
 		<hr>
 		<!-- creo la struttura della tabella prodotti -->
 		<!-- la tabella verrà visualizzata solo se l'elenco dei prodotti ha una dimensione >0 -->
 
 		<div class="alert alert-primary" role="alert" th:if="${elenco.size()==0}">
-			<h3>Nessun Contenuto trovato</h3>
+			<h3>Nessun Regista trovato</h3>
 		</div>
 
 		<table class="table table-success table-striped" th:if="${elenco.size()>0}">
@@ -28,11 +28,10 @@
 			<thead>
 				<tr>
 					<th>Id</th>
-					<th>Titolo</th>
-					<th>Regista</th>
-					<th>Genere</th>
-					<th>Tipologia</th>
-					<th></th>
+					<th>Nome</th>
+					<th>Cognome</th>
+					<th>Nazionalita</th>
+                    <th></th>
 					<th></th>
 					<th></th>
 				</tr>
@@ -40,17 +39,16 @@
 			
 			<tbody>
 				
-				<tr th:each="c: ${elenco}">
-					<td th:text="${c.id}"></td>
-					<td th:text="${c.titolo}"></td>
-					<td th:text="|${c.regista.nome} ${c.regista.cognome}|"></td>
-					<td th:text="${c.genere}"></td>
-					<td th:text="${c.tipologia}"></td>
-					<td><a th:href="|/Contenuti/dettaglio/${c.id}|"><i class="fa-solid fa-eye td-button"
+				<tr th:each="r: ${elenco}">
+					<td th:text="${r.id}"></td>
+					<td th:text="${r.nome}"></td>
+					<td th:text="${r.cognome}"></td>
+					<td th:text="${r.nazionalita}"></td>
+					<td><a th:href="|/Registi/dettaglio/${r.id}|"><i class="fa-solid fa-eye td-button"
 						title="Mostra dettaglio"></i></a></td>
-					<td><a th:href="|/Contenuti/modifica/${c.id}|"><i class="fa-solid fa-pen-to-square td-button"
+					<td><a th:href="|/Registi/modifica/${r.id}|"><i class="fa-solid fa-pen-to-square td-button"
 						title="Modifica"></i></a></td>
-					<td><a th:href="|/Contenuti/elimina/${c.id}|" onclick="return confirm('Sei sicuro/a?')"><i
+					<td><a th:href="|/Registi/elimina/${r.id}|" onclick="return confirm('Sei sicuro/a?')"><i
 						class="fa-solid fa-trash td-button" title="Elimina"></i></a></td>
 				</tr>
 			</tbody>  

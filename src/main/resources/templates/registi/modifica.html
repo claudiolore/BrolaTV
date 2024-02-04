@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+	<title>Modifica Regista</title>
+	<meta th:replace="fragments/resources :: head">
+</head>
+<body>
+  <div class="container">
+	<nav th:replace="fragments/navbar :: navbar('registi')"></nav>	
+
+	<h1>Modifica Regista</h1>
+	<hr>	
+	<form 
+		id="form-regista"
+		th:action="@{/Registi/modifica}"
+		th:object="${regista}"
+		method="post">
+		
+		<input type="hidden" th:field="*{id}">
+		<div class="row">
+			<div class="col-4">
+				<label class="form-label" for="nome">Nome</label>
+				<input type="text" class="form-control" id="nome" th:field="*{nome}">	
+				
+				<label class="form-label" for="cognome">Cognome</label>
+				<input type="text" class="form-control" id="cognome" th:field="*{cognome}">	
+				
+				<label class="form-label" for="nazionalita">Nazionalita</label>
+				<input type="text" class="form-control" id="nazionalita" th:field="*{nazionalita}">	
+				
+				<label class="form-label" for="annoDiNascita">Anno Di Nascita</label>
+				<input type="text" class="form-control" id="annoDiNascita" th:field="*{annoDiNascita}">	
+                
+                <label class="form-label" for="immagine">Immagine</label>
+				<input type="text" class="form-control" id="immagine" th:field="*{immagine}">	
+				
+				<label class="form-label" for="contenuto">Contenuti Girati</label>
+				<!-- <select class="form-select" th:field="*{attore}" >
+					<option th:each="a : ${elencoAttori}" th:value="${a.id}" th:text="|${a.nome} ${a.cognome}|"></option>
+				</select>	 -->
+			</div>	
+			
+		</div>
+		<div class="row mt-3">
+			<div class="col-2">
+				<button class="btn btn-success" type="submit"><i class="fa-solid fa-check"></i> Salva</button>
+				<a class="btn btn-success" th:href="@{/Contenuti/elenco}"><i class="fa-solid fa-xmark"></i> Annulla</a>
+			</div>	
+		</div>
+	</form>
+	
+  </div>
+  <script th:replace="fragments/resources :: scripts"></script>
+</body>
+</html>

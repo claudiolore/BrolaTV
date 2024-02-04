@@ -4,9 +4,13 @@ import java.util.ArrayList;
 
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
+import org.generation.italy.netfliz.model.Attore;
+import org.generation.italy.netfliz.model.Contenuto;
 import org.generation.italy.netfliz.model.Regista;
+import org.generation.italy.netfliz.repository.ContenutiRepository;
 import org.generation.italy.netfliz.repository.RegistaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/Registi")
 public class RegistaController {
 
+	@Autowired
+	ContenutiRepository contenutiRepository;
 	@Autowired
 	RegistaRepository registaRepository;
 
@@ -78,7 +84,7 @@ public class RegistaController {
 		return "/registi/elenco";
 	}
 //--------------------------------------------------------------------------------------------------------------	
-	@GetMapping("{id}")
+	@GetMapping("/dettaglio/{id}")
 	public String dettaglioRegista(Model model, @PathVariable Integer id) {
 		Optional<Regista> optRegista = registaRepository.findById(id);
 		if (optRegista.isPresent()) {	//il prodotto è stato trovato
@@ -114,9 +120,11 @@ public class RegistaController {
 		if (optRegista.isPresent())		
 		{
 			Regista r= optRegista.get();
+			List<Contenuto> elencoContenuti=contenutiRepository.findByOrderByTitolo();
 		
+			model.addAttribute("elencoContenuti", elencoContenuti);
 			model.addAttribute("regista", r);
-			return "/regista/modifica";
+			return "/registi/modifica";
 		}
 		else
 			return "nontrovato";
