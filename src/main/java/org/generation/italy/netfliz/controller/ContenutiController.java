@@ -129,6 +129,7 @@ public class ContenutiController {
 	@GetMapping("/modifica/{id}")			
 	public String modificaContenutoGet(Model model, @PathVariable("id") Integer id) {
 		
+		@SuppressWarnings("null")
 		Optional<Contenuto> optContenuto=contenutiRepository.findById(id);
 		if (optContenuto.isPresent())		
 		{

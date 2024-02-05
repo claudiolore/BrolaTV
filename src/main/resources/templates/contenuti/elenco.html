@@ -16,12 +16,13 @@
 	<div class="container">
 		<h1>Elenco Contenuti</h1>
 		<hr>
-		<a class="btn btn-success mb-2" th:href=@{/Contenuti/nuovoContenuto} style="background-color: rgb(188, 108, 11);"><i class="fa-solid fa-plus"></i> Nuovo</a>
+		<a class="btn btn-success mb-2" th:href=@{/Contenuti/nuovoContenuto} style="background-color: rgb(166, 109, 39);"><i class="fa-solid fa-plus"></i> Nuovo</a>
 			
 		<div class="alert alert-primary" role="alert" th:if="${elenco.size()==0}">
 			<h3>Nessun Contenuto trovato</h3>
 		</div>
 
+		
 		<table class="table table-success table-striped" th:if="${elenco.size()>0}">
 	
 			<thead>
@@ -55,6 +56,7 @@
 			</tbody>  
 		</table>
 	</div>
+	  
 
 	<script th:replace="fragments/resources :: scripts"></script>
 </body>
