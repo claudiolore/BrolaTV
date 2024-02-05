@@ -125,7 +125,7 @@ public class AttoriController {
 			Optional<Attore> optAttore=attoriRepository.findById(id);
 			if (optAttore.isPresent())		
 			{
-				contenutiRepository.deleteById(id);
+				attoriRepository.deleteById(id);
 				return "redirect:/Attori/elenco";	
 			}
 			else

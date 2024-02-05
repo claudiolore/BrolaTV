@@ -1,9 +1,12 @@
 @charset "UTF-8";
 
 .nav-pills .nav-link.active {
-    color: #fff;
-    background-color: #29b9a9;
+    color:  #f6f6f6;
+    background-color: #5f1337;
 }	
 body{
-    background-color: #b8cee1;
+    background-color: #5f1337;
+}
+h1{
+    color:bisque;
 }

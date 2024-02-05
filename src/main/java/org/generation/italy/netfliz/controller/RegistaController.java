@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import org.generation.italy.netfliz.model.Attore;
 import org.generation.italy.netfliz.model.Contenuto;
 import org.generation.italy.netfliz.model.Regista;
 import org.generation.italy.netfliz.repository.ContenutiRepository;

@@ -16,9 +16,8 @@
 	<div class="container">
 	<h1>Elenco Contenuti</h1>
 		<hr>
-		<!-- creo la struttura della tabella prodotti -->
-		<!-- la tabella verrà visualizzata solo se l'elenco dei prodotti ha una dimensione >0 -->
-
+		<a class="btn btn-success mb-2" th:href=@{/Contenuti/nuovoContenuti}><i class="fa-solid fa-plus"></i> Nuovo</a>
+			
 		<div class="alert alert-primary" role="alert" th:if="${elenco.size()==0}">
 			<h3>Nessun Contenuto trovato</h3>
 		</div>
