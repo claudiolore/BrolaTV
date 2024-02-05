@@ -17,10 +17,7 @@
 	<h1>Elenco Attori</h1>
 		<hr>
 		<a class="btn btn-success mb-2" th:href=@{/Attori/nuovo}><i class="fa-solid fa-plus"></i> Nuovo</a>
-		
-		<!-- creo la struttura della tabella prodotti -->
-		<!-- la tabella verrà visualizzata solo se l'elenco dei prodotti ha una dimensione >0 -->
-
+	
 		<div class="alert alert-primary" role="alert" th:if="${elenco.size()==0}">
 			<h3>Nessun Attore trovato</h3>
 		</div>

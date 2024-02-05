@@ -14,16 +14,16 @@
 	</div>
 	
 	<div class="container">
-	<h1">Elenco Registi</h1>
+		<h1>Elenco Registi</h1>
 		<hr>
 		<a class="btn btn-success mb-2" th:href=@{/Registi/nuovo}><i class="fa-solid fa-plus"></i> Nuovo</a>
-
+			
 		<div class="alert alert-primary" role="alert" th:if="${elenco.size()==0}">
 			<h3>Nessun Regista trovato</h3>
 		</div>
 
 		<table class="table table-success table-striped" th:if="${elenco.size()>0}">
-			<!-- intestazione della tabella -->
+			
 			<thead>
 				<tr>
 					<th>Id</th>

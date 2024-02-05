@@ -14,16 +14,16 @@
 	</div>
 	
 	<div class="container">
-	<h1>Elenco Contenuti</h1>
+		<h1>Elenco Contenuti</h1>
 		<hr>
-		<a class="btn btn-success mb-2" th:href=@{/Contenuti/nuovoContenuti}><i class="fa-solid fa-plus"></i> Nuovo</a>
+		<a class="btn btn-success mb-2" th:href=@{/Contenuti/nuovoContenuto}><i class="fa-solid fa-plus"></i> Nuovo</a>
 			
 		<div class="alert alert-primary" role="alert" th:if="${elenco.size()==0}">
 			<h3>Nessun Contenuto trovato</h3>
 		</div>
 
 		<table class="table table-success table-striped" th:if="${elenco.size()>0}">
-			<!-- intestazione della tabella -->
+	
 			<thead>
 				<tr>
 					<th>Id</th>
@@ -55,7 +55,10 @@
 			</tbody>  
 		</table>
 	</div>
+
 	<script th:replace="fragments/resources :: scripts"></script>
 </body>
 
 </html>
+
+
