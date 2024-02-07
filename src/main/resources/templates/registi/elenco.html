@@ -14,44 +14,23 @@
 	</div>
 	
 	<div class="container">
-		<h1>Elenco Registi</h1>
-		<hr>
+		<h1>Registi</h1>
 		<a class="btn btn-success mb-2" th:href=@{/Registi/nuovo}><i class="fa-solid fa-plus"></i> Nuovo</a>
-			
-		<div class="alert alert-primary" role="alert" th:if="${elenco.size()==0}">
-			<h3>Nessun Regista trovato</h3>
-		</div>
+	</div>
 
-		<table class="table table-success table-striped" th:if="${elenco.size()>0}">
-			
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Nome</th>
-					<th>Cognome</th>
-					<th>Nazionalita</th>
-                    <th></th>
-					<th></th>
-					<th></th>
-				</tr>
-			</thead>
-			
-			<tbody>
-				
-				<tr th:each="r: ${elenco}">
-					<td th:text="${r.id}"></td>
-					<td th:text="${r.nome}"></td>
-					<td th:text="${r.cognome}"></td>
-					<td th:text="${r.nazionalita}"></td>
-					<td><a th:href="|/Registi/dettaglio/${r.id}|"><i class="fa-solid fa-eye td-button"
-						title="Mostra dettaglio"></i></a></td>
-					<td><a th:href="|/Registi/modifica/${r.id}|"><i class="fa-solid fa-pen-to-square td-button"
-						title="Modifica"></i></a></td>
-					<td><a th:href="|/Registi/elimina/${r.id}|" onclick="return confirm('Sei sicuro/a?')"><i
-						class="fa-solid fa-trash td-button" title="Elimina"></i></a></td>
-				</tr>
-			</tbody>  
-		</table>
+	<div class="container text-center mt-3">
+		<div class="row">
+		  	<div th:each="r: ${elenco}" class="col-sm mt-3">
+				<div class="card" style="width: 18rem;">
+					<img src="    " class="card-img-top" alt="...">
+					<div class="card-body">
+					 	 <h3 class="card-title" th:text="|${r.nome.toUpperCase()} ${r.cognome.toUpperCase}|"></h3>
+					  	<p class="card-text" th:text="|${r.nazionalita}"></p>
+					  	<a th:href="|/Registi/dettaglio/${r.id}|" class="btn btn-primary">Maggiori INFO</a>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<script th:replace="fragments/resources :: scripts"></script>
 </body>

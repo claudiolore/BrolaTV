@@ -98,9 +98,11 @@ public class RegistaController {
 	@GetMapping("/nuovo")
 	public String nuovoRegistaGet(Model model) {
 		Regista r=new Regista();
-		model.addAttribute("Regista", r);
+		List<Contenuto> elencoContenuti = contenutiRepository.findAll();
 		
-		return "/registi/nuovoRegista";
+		model.addAttribute("elencoContenuti", elencoContenuti);
+		model.addAttribute("regista", r);
+		return "/registi/nuovo";
 	}
 
 	@PostMapping("/nuovo")

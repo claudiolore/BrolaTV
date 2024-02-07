@@ -8,7 +8,7 @@
 	<div class="container">
 		<nav th:replace="fragments/navbar :: navbar('contenuti')"></nav>	
 		<div class="row">
-			<h1 th:text="${contenuto.titolo}"></h1>
+			<h1 th:text="${contenuto.titolo}" class="mt-3 text-center"></h1>
 			<hr>
 			<!-- in totale ho 12 "spazi" -->
 			<div class="col-6">
@@ -26,6 +26,8 @@
 				<dd th:text="${contenuto.durata}">
 					<dt>Regista</dt>
 				<dd th:text="|${contenuto.regista.nome} ${contenuto.regista.cognome}|">
+					<dt>ATTORI</dt>
+				<dd th:each="a: ${elenco}" th:text="|${a.nome} ${a.cognome}|">
 				</dl>
 			</div>
 			<div class="col-6" th:if="${contenuto.copertina!=null}">

@@ -119,8 +119,8 @@ public class ContenutiController {
 
 	@PostMapping("/nuovo")
 	public String nuovoContenutoPost(@ModelAttribute("contenuto") Contenuto c) {
-		contenutiRepository.save(c);
 		
+		contenutiRepository.save(c);
 		return "redirect:/Contenuti/elenco";
 	}
 	
@@ -129,7 +129,6 @@ public class ContenutiController {
 	@GetMapping("/modifica/{id}")			
 	public String modificaContenutoGet(Model model, @PathVariable("id") Integer id) {
 		
-		@SuppressWarnings("null")
 		Optional<Contenuto> optContenuto=contenutiRepository.findById(id);
 		if (optContenuto.isPresent())		
 		{

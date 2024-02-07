@@ -27,12 +27,12 @@
 				<label class="form-label" for="tipologia">Tipologia</label>
 				<input type="text" class="form-control" id="tipologia" th:field="*{tipologia}">	
 				
-				<label class="form-label" for="immagine">Immagine</label>
-				<input type="text" class="form-control" id="immagine" th:field="*{immagine}">		
+				<label class="form-label" for="copertina">Copertina</label>
+				<input type="text" class="form-control" id="copertina" th:field="*{copertina}">		
 				
 				<label class="form-label" for="regista">Regista</label>
 				<select class="form-select" th:field="*{regista}" >
-					<option th:each="f : ${elencoRegisti}" th:value="${f.id}" th:text="${f.id}"></option>
+					<option th:each="r : ${elencoRegisti}" th:value="${r.id}" th:text="${r.id}"></option> 
 				</select>	
 			</div>	
 			

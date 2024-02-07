@@ -1,12 +1,66 @@
 @charset "UTF-8";
 
 .nav-pills .nav-link.active {
-    color:  #f6f6f6;
-    background-color: #5f1337;
+    color:  #454545;
+    background-color: #bb84e8;
 }	
 body{
-    background-color: #5f1337;
+    background-color: #454545;
 }
-h1{
-    color:bisque;
+h1, h2{
+    color:#bb84e8;
+    margin-top: 5px;
+    font-size: 70px;
+    font-family: 'Black Ops One', system-ui;
+} 
+
+h3, h4,h5{
+    color:#bb84e8;
+    margin-top: 5px;
+}
+p{
+    color: #454545;
+}
+.btn-success{
+    background-color: #bb84e8;
+    color: #454545;
+}
+dd{
+    color: #bb84e8;
+    font-size: 26px ;
+    text-align: center;
+    
+}
+dt{
+    color: #bb84e8;
+    font-size: 33px;
+    text-align: center;
+    margin-top: 5px;
+}
+.card{
+    background-color: #bb84e8;
+    color: #454545;
+}
+.btn-primary{           
+    border-color: #454545;
+    background-color: #bb84e8;
+    color: #454545;
+}
+.form-control{          /* ! barra ricerca in alto(quella in cui si scrive)*/
+    border-color: #454545;
+    background-color: #bb84e8;
+    color: #454545;
+}
+.navbar{
+    background-color: #454545;
+}
+.card-text{
+    font-size: 25px;
+}
+.card-title{
+    font-family: 'Righteous', sans-serif;
+}
+.btn-outline-success{
+    border-color: #bb84e8;
+    color: #bb84e8;
 }
