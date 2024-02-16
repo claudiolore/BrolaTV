@@ -1,66 +1,86 @@
 @charset "UTF-8";
 
 .nav-pills .nav-link.active {
-    color:  #454545;
+    color: #454545;
     background-color: #bb84e8;
-}	
-body{
+}
+
+body {
     background-color: #454545;
 }
-h1, h2{
-    color:#bb84e8;
+.categoria{
+    color: #bb84e8;
     margin-top: 5px;
     font-size: 70px;
     font-family: 'Black Ops One', system-ui;
-} 
+}                                                  /* !   chiedere a enzo  */ 
 
-h3, h4,h5{
-    color:#bb84e8;
+h3,
+h4,
+h5 {
+    color: #bb84e8;
     margin-top: 5px;
 }
-p{
+
+p {
     color: #454545;
 }
-.btn-success{
+
+.btn-success {
     background-color: #bb84e8;
     color: #454545;
 }
-dd{
+
+dd {
     color: #bb84e8;
-    font-size: 26px ;
+    font-size: 26px;
     text-align: center;
-    
+
 }
-dt{
+
+dt {
     color: #bb84e8;
     font-size: 33px;
     text-align: center;
     margin-top: 5px;
 }
-.card{
+
+.card {
     background-color: #bb84e8;
     color: #454545;
 }
-.btn-primary{           
+
+.btn-primary {
     border-color: #454545;
     background-color: #bb84e8;
     color: #454545;
 }
-.form-control{          /* ! barra ricerca in alto(quella in cui si scrive)*/
+
+.form-control {
+                                        /* ! barra ricerca in alto(quella in cui si scrive)*/
     border-color: #454545;
     background-color: #bb84e8;
     color: #454545;
 }
-.navbar{
+
+.navbar {
     background-color: #454545;
 }
-.card-text{
+
+.card-text {
     font-size: 25px;
 }
-.card-title{
+
+.card-title {
     font-family: 'Righteous', sans-serif;
 }
-.btn-outline-success{
+
+.btn-outline-success {
     border-color: #bb84e8;
     color: #bb84e8;
+}
+
+.immagine-home{
+    display: flex;
+    justify-content: center;
 }

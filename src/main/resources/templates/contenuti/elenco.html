@@ -5,68 +5,60 @@
 	<meta charset="UTF-8">
 	<title>Elenco Contenuti</title>
 
-	<meta th:replace="fragments/resources :: head">   <!-- 	FRAMMENTI   -->
+	<meta th:replace="fragments/resources :: head"> <!-- 	FRAMMENTI   -->
 </head>
 
 <body class="bg-success.bg-gradient">
-	
+
+
 	<div class="container">
 		<nav th:replace="fragments/navbar :: navbar('contenuti')"></nav>
 	</div>
 
+
 	<div class="container">
-		<h1>Contenuti</h1>
+		<h1 class="categoria">Contenuti</h1>
 		<a class="btn btn-success mb-2" th:href=@{/Contenuti/nuovo}><i class="fa-solid fa-plus"></i> Nuovo</a>
 	</div>
-
 	<div class="container text-center mt-3">
 		<div class="row">
-		  	<div th:each="c: ${elenco}" class="col-sm mt-3">
+			<div th:each="c: ${elenco}" class="col-sm mt-3">
 				<div class="card" style="width: 18rem;">
-					<!-- <img src="/src/main/resources/static/img/LeFiammedegliEretici.webp" class="card-img-top" alt="..."> -->
-					<img src="img/${c.copertina}" class="card-img-top" alt="...">
+
+					<img th:src="|/img/${c.copertina}|" class="card-img-top" alt="...">
+
 					<div class="card-body">
-					 	 <h3 class="card-title" th:text="${c.titolo.toUpperCase()}"></h3>
-					  	<p class="card-text" th:text="|${c.regista.nome} ${c.regista.cognome}|"></p>
-					  	<a th:href="|/Contenuti/dettaglio/${c.id}|" class="btn btn-primary">Maggiori INFO</a>
+						<h3 class="card-title" th:text="${c.titolo.toUpperCase()}"></h3>
+						<p class="card-text" th:text="|${c.regista.nome} ${c.regista.cognome}|"></p>
+						<a th:href="|/Contenuti/dettaglio/${c.id}|" class="btn btn-primary">Maggiori INFO</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-		<!-- <div class="container mt-3">
-			<h2>Elenco horror</h2>
-		</div>
 
+
+	<div class="container mt-3">
+		<h2 class="categoria">Horror</h2>
+	</div>
+	<div class="container text-center mt-3">
 		<div class="row">
 			<div th:each="c: ${elenco}" class="col-sm mt-3">
-			  <div th:if="${c.genere.equals("horror")}" class="card" style="width: 18rem;">
-				  <img src="" class="card-img-top" alt="...">
-				  <div class="card-body">
-						<h5 class="card-title" th:text="${c.titolo}"></h5>
+				<div th:if="${c.genere.equals('horror')}" class="card" style="width: 18rem;">
+					<img th:src="|/img/${c.copertina}|" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h3 class="card-title" th:text="${c.titolo.toUpperCase}"></h3>
 						<p class="card-text m-1" th:text="|${c.regista.nome} ${c.regista.cognome}|"></p>
 						<p class="card-text" th:text="${c.genere}"></p>
 						<a th:href="|/Contenuti/dettaglio/${c.id}|" class="btn btn-primary">Maggiori INFO</a>
-				  </div>
-			  </div>
-		  </div>
-	  </div> -->
-
-
-
-	
-
-
-
-
-
-
-
-
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+		
 
 	<script th:replace="fragments/resources :: scripts"></script>
 </body>
 
 </html>
-
-
